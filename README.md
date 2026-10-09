@@ -1,93 +1,52 @@
-# Blog en Django
+Qué entregar
+La URL directa de un repositorio público de GitHub con el código completo y funcional del blog. El repo debe contener: código del proyecto Django, apps, templates, archivos estáticos, migraciones, requirements.txt, README.md, .gitignore y .env.example (solo si usaste variables de entorno).
 
-Aplicación web de blog basada en el proyecto original de consola. Se conservaron los conceptos de publicaciones, autor, etiquetas y estados, trasladándolos a Django y SQLite.
+Criterios de aceptación
+Publicaciones (desde la interfaz web, no solo el admin)
 
-## Funcionalidades
+Listar posts, ver detalle, crear, editar y eliminar.
+Cargar y mostrar imagen del post; el template no se rompe si falta la imagen.
+Usuarios
 
-- Listado público de publicaciones publicadas.
-- Vista de detalle de una publicación.
-- Alta, edición y eliminación de publicaciones para usuarios autenticados.
-- Solo el autor de una publicación puede editarla o eliminarla.
-- Registro, inicio y cierre de sesión.
-- Carga y visualización opcional de imágenes.
-- Búsqueda por título y filtrado por etiqueta.
-- Estados de publicación: borrador, publicada y archivada.
-- Pruebas automatizadas de permisos y flujos principales.
+Registro, login y logout funcionando.
+Perfil accesible (editar perfil e imagen de perfil solo si los implementaste).
+El sistema distingue usuario anónimo de autenticado.
+Rutas protegidas
 
-## Requisitos
+Crear/editar/eliminar posts y editar perfil requieren sesión iniciada.
+La protección está en la view con @login_required o LoginRequiredMixin (ocultar el botón en el template no alcanza).
+Media
 
-- Python 3.10 o superior.
-- pip.
+MEDIA_URL y MEDIA_ROOT configurados; las imágenes se ven en desarrollo.
+Búsqueda (solo si la implementaste)
 
-## Instalación local
+Busca por título o contenido, muestra resultados y avisa cuando no hay coincidencias.
+Repositorio
 
-```bash
-python -m venv .venv
-```
+Es público y abre correctamente en el navegador.
+Existen requirements.txt (con Django, Pillow y python-decouple si corresponde, actualizado), README.md y .gitignore.
+El historial de commits muestra progreso (no todo en un único commit final).
+No hay rutas absolutas; la config se apoya en BASE_DIR.
+README — debe incluir como mínimo:
 
-Activar el entorno virtual:
+Título, descripción breve, tecnologías, funcionalidades principales.
+Instrucciones de instalación, migraciones y arranque del servidor.
+Información del autor.
+Sin contraseñas ni claves reales.
+Pasos
+Antes de entregar, verificá localmente y contra GitHub que: el servidor inicia sin errores, las migraciones aplican, el CRUD funciona, las imágenes cargan (y el template resiste sin imagen), registro/login/logout funcionan, las rutas protegidas redirigen, y los cambios están sincronizados con GitHub (no basta con guardar en local).
 
-**Windows (PowerShell):**
-```powershell
-.venv\Scripts\Activate.ps1
-```
+Cómo entregar
+Enviá el enlace directo al repositorio del proyecto. No entregues un .zip, ni una captura, ni el link a tu perfil general de GitHub.
 
-**macOS / Linux:**
-```bash
-source .venv/bin/activate
-```
-
-Instalar dependencias y preparar la base de datos:
-
-```bash
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver
-```
-
-Abrir `http://127.0.0.1:8000/`.
-
-## Pruebas
-
-```bash
-python manage.py test
-```
-
-## Seguridad antes de publicar/desplegar
-
-- `DEBUG` se configura según la variable de entorno `DJANGO_DEBUG` (por defecto, activado solo para desarrollo local).
-- En producción, definir `DJANGO_SECRET_KEY` con un valor secreto y único.
-- Configurar `DJANGO_ALLOWED_HOSTS` con los dominios permitidos.
-- No subir `.env`, `db.sqlite3`, `media/`, credenciales ni el entorno virtual.
-- En producción, servir archivos multimedia mediante un almacenamiento adecuado y configurar HTTPS.
-- Ejecutar `python manage.py check --deploy` con los ajustes de producción.
-
-## Publicar el proyecto en GitHub
-
-1. Crear un repositorio **público** vacío en GitHub.
-2. Desde esta carpeta, ejecutar:
-
-```bash
-git init
-git add .
-git commit -m "Crear blog web con Django"
-git branch -M main
-git remote add origin https://github.com/USUARIO/REPOSITORIO.git
-git push -u origin main
-```
-
-3. Sustituir `USUARIO/REPOSITORIO` por la URL real del repositorio.
-4. Revisar la pestaña **Actions** (si se añade CI), el README y los archivos antes de confirmar que la publicación está terminada.
-
-> No se ha publicado automáticamente en GitHub: para hacerlo se necesita que el usuario cree o autorice el repositorio remoto. Este paquete queda preparado para subirlo.
-
-## Modelo de datos
-
-Cada publicación contiene título, contenido, autor, etiquetas, estado, fecha de creación/actualización e imagen opcional. Las cuentas y contraseñas son gestionadas por el sistema de autenticación de Django; las contraseñas no se guardan en texto plano en el modelo del blog.
-
-## Limitaciones conocidas
+Qué evitar
+Repositorio privado (los evaluadores no lo verían).
+Subir venv/, .env, __pycache__/, .pyc, archivos temporales o config local del editor → usá .gitignore.
+Subir claves o contraseñas reales (ni en el código ni en el README).
+Dejar rutas absolutas de tu computadora.
+Faltar requirements.txt o las migraciones.
+Probar todo con sesión iniciada y olvidar al visitante anónimo.
+README que solo tenga el nombre del proyecto.
 
 - La aplicación usa SQLite para desarrollo.
 - Las etiquetas se almacenan como texto separado por comas, para mantener simple la migración desde el proyecto original.
