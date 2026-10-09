@@ -1,4 +1,6 @@
 Qué entregar
+
+
 La URL directa de un repositorio público de GitHub con el código completo y funcional del blog. El repo debe contener: código del proyecto Django, apps, templates, archivos estáticos, migraciones, requirements.txt, README.md, .gitignore y .env.example (solo si usaste variables de entorno).
 
 Criterios de aceptación
