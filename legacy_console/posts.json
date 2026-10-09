@@ -1,0 +1,45 @@
+[
+    {
+        "id": 1,
+        "titulo": "Primeros pasos con Python",
+        "contenido": "Inicio en Python",
+        "autor": {
+            "nombre": "Romulo Gartner",
+            "bio": "Desarrollador web junior."
+        },
+        "tags": [
+            "Python",
+            "Principiantes"
+        ],
+        "estado": "publicado"
+    },
+    {
+        "id": 2,
+        "titulo": "Qué es Django",
+        "contenido": "Intro a Django",
+        "autor": {
+            "nombre": "Romulo Gartner",
+            "bio": "Desarrollador web junior."
+        },
+        "tags": [
+            "Python",
+            "Django",
+            "Web"
+        ],
+        "estado": "borrador"
+    },
+    {
+        "id": 3,
+        "titulo": "Organizando datos con diccionarios",
+        "contenido": "Diccionarios en Python",
+        "autor": {
+            "nombre": "Romulo Gartner",
+            "bio": "Desarrollador web junior."
+        },
+        "tags": [
+            "Python",
+            "Diccionarios"
+        ],
+        "estado": "archivado"
+    }
+]

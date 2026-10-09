@@ -1,0 +1,1 @@
+Se conserva el ejercicio original de consola como referencia. La aplicación principal del repositorio es la versión web Django situada en la raíz. El código de consola original tenía una importación rota en validaciones.py (estados_post no definido), por lo que no se copió ese módulo defectuoso.

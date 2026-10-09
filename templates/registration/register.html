@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Crear cuenta · Blog Django{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Crear cuenta</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrarme</button>
+  </form>
+</section>
+{% endblock %}

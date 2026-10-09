@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Publicaciones · Blog Django{% endblock %}
+{% block content %}
+<h1>Publicaciones</h1>
+<p class="muted">Artículos publicados por la comunidad.</p>
+<form method="get" class="card">
+  <label for="q">Buscar</label>
+  <input id="q" name="q" value="{{ query }}" placeholder="Título o contenido">
+  <label for="tag">Etiqueta</label>
+  <input id="tag" name="tag" value="{{ tag }}" placeholder="Python, Django...">
+  <button type="submit">Buscar</button>
+  <a class="btn secondary" href="{% url 'post_list' %}">Limpiar</a>
+</form>
+{% for post in posts %}
+  <article class="card">
+    <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+    <p class="muted">Por {{ post.author.username }} · {{ post.created_at|date:"d/m/Y H:i" }}</p>
+    {% if post.image %}<img class="post-image" src="{{ post.image.url }}" alt="Imagen de {{ post.title }}">{% endif %}
+    <p>{{ post.content|truncatewords:40 }}</p>
+    {% if post.tag_list %}<p class="muted">Etiquetas: {{ post.tag_list|join:", " }}</p>{% endif %}
+  </article>
+{% empty %}
+  <div class="card"><p>No hay publicaciones que coincidan con la búsqueda.</p></div>
+{% endfor %}
+{% endblock %}

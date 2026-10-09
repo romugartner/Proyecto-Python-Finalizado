@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Blog Django{% endblock %}</title>
+  <style>
+    :root { color-scheme: light; --ink:#202938; --muted:#667085; --accent:#2859a5; --line:#d9e0e8; --bg:#f6f8fb; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:var(--bg); }
+    header { background:#172b4d; color:white; padding:1rem 1.25rem; }
+    nav { max-width:980px; margin:auto; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+    nav a { color:white; text-decoration:none; }
+    nav .brand { font-weight:750; margin-right:auto; }
+    main { max-width:900px; margin:2rem auto; padding:0 1rem; }
+    .card { background:white; border:1px solid var(--line); border-radius:12px; padding:1.25rem; margin:1rem 0; }
+    .btn, button { display:inline-block; border:0; border-radius:7px; padding:.65rem .9rem; background:var(--accent); color:white; text-decoration:none; font:inherit; cursor:pointer; }
+    .btn.secondary { background:#e8edf5; color:var(--ink); }
+    .btn.danger { background:#a62e3f; }
+    input, textarea, select { width:100%; padding:.65rem; border:1px solid #b9c4d1; border-radius:7px; font:inherit; margin:.2rem 0 .8rem; }
+    label { font-weight:650; }
+    .muted { color:var(--muted); }
+    .messages { list-style:none; padding:0; }
+    .messages li { background:#e6f5e9; border:1px solid #b5dfbe; border-radius:7px; padding:.7rem; margin:.5rem 0; }
+    .errorlist { color:#a62e3f; }
+    img.post-image { max-width:100%; height:auto; border-radius:8px; }
+    footer { max-width:900px; margin:3rem auto 1rem; padding:1rem; color:var(--muted); font-size:.9rem; }
+  </style>
+</head>
+<body>
+<header>
+  <nav>
+    <a class="brand" href="{% url 'post_list' %}">Blog Django</a>
+    <a href="{% url 'post_list' %}">Inicio</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'post_create' %}">Nueva publicación</a>
+      <span>Hola, {{ user.username }}</span>
+      <form method="post" action="{% url 'logout' %}" style="margin:0">
+        {% csrf_token %}<button type="submit" class="btn secondary">Cerrar sesión</button>
+      </form>
+    {% else %}
+      <a href="{% url 'login' %}">Iniciar sesión</a>
+      <a href="{% url 'register' %}">Registrarse</a>
+    {% endif %}
+  </nav>
+</header>
+<main>
+  {% if messages %}
+    <ul class="messages">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% block content %}{% endblock %}
+</main>
+<footer>Proyecto educativo de blog con Django · Valida los permisos antes de publicar.</footer>
+</body>
+</html>

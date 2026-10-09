@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} · Blog Django{% endblock %}
+{% block content %}
+<article class="card">
+  <h1>{{ post.title }}</h1>
+  <p class="muted">Por {{ post.author.username }} · {{ post.created_at|date:"d/m/Y H:i" }} · {{ post.get_status_display }}</p>
+  {% if post.image %}<img class="post-image" src="{{ post.image.url }}" alt="Imagen de {{ post.title }}">{% endif %}
+  <div>{{ post.content|linebreaks }}</div>
+  {% if post.tag_list %}<p class="muted">Etiquetas: {{ post.tag_list|join:", " }}</p>{% endif %}
+  {% if user.is_authenticated and user == post.author or user.is_staff %}
+    <a class="btn" href="{% url 'post_update' post.pk %}">Editar</a>
+    <a class="btn danger" href="{% url 'post_delete' post.pk %}">Eliminar</a>
+  {% endif %}
+  <a class="btn secondary" href="{% url 'post_list' %}">Volver</a>
+</article>
+{% endblock %}
